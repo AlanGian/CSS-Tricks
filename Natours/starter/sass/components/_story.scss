@@ -1,0 +1,95 @@
+.story {
+    width: 75%;
+    // it's a block element inside a block element
+    // so we can use margin: 0 auto;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+
+    // direct child selector
+    // & > * {
+    // it will only work for the story__text
+    // because inside of story__shape, we have already
+    // defined transform that one takes precedence over
+    // this one
+
+    // transform: skewX(12deg);
+    // }
+
+    &__shape {
+        // in order to make the circle width & height & float
+        // are necessary
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        // background-color: orange; //before put the image
+
+        // this shape-outside, all it does is to define where
+        // the content floats around the element
+
+        // shape-outside(radius_of_the_circle at center )
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+
+        // if we actually want the element to like that circle
+        // we can then use the clip-path property.
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+
+        // add some space between story__shape and story__text
+        // the best way to move around an element that is floated
+        // is actually not mess with margins or anything like that
+        // we should just use a transform
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+    }
+
+    &__image {
+        // it's because this image is inside of a shape
+        // which has its height& width well defined, so 
+        //if we say height: 100%, that will be the 100% of the 
+        // parent;
+        height: 100%;
+        // translate the image to the center of the figure
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        // when we hover the story box, then the figcaption moves up
+        // to the position and fades in. So what this means is that
+        // before we hover it, it actually needs to be invisible
+
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__image{
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%) grayscale(100%);
+    }
+
+}

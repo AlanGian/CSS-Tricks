@@ -1,0 +1,9 @@
+@mixin clearfix {
+    &::after {
+        // always specify the content property for the pseudo class,
+        // otherwise a pseudo element will simply not appear.
+        content: "";
+        display: table;
+        clear: both;
+    }
+}

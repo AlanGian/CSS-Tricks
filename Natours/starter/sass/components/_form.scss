@@ -1,0 +1,78 @@
+.form {
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: 1.5rem;
+
+        // set these two properties that's something particular 
+        // they don't inherit basically the font properties
+        font-family: inherit;
+        color: inherit;
+
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .3s;
+
+        &:focus {
+            outline: none;
+
+            // the foucus is actually very important for people who
+            // use a webpage without a mouse but only with a keyboard
+            // and so when they move around with a keyboard on the 
+            // webpage, they need to know which form elements are 
+            // actually focused and so for accessibility reasons,
+            // we should never just do input foccus, and set the outline
+            // to none and call it a day.
+            box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            border-bottom: 3px solid $color-primary;
+
+            &:focus:invalid {
+                border-bottom: 3px solid $color-secondary-dark;
+            }
+
+            // remember that pseudo elements, they are with there two colons,
+            // and they respresent things that are actually on the webpage
+
+            &::-webkit-input-placeholder {
+                color: $color-grey-dark-2;
+            }
+
+        }
+    }
+
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+    }
+
+    // input, and label, they are siblings,because they are on the same level,
+    // they're both children of this parent element, but in CSS we have a very
+    // powerful selector and it is called the sibling selector.
+    // And so, this is how it works, and this one is actually the adjacent sibling +.
+    // (there is another sibling selector is more general ~)
+    // So what is an adjacent sibling? Well, it's just a sibling that comes 
+    // immediately after the element that we select in the first place.
+    &__input:placeholder-shown+&__label {
+
+        // if we just set the opacity to zero.then the element will basically
+        // still be on the page, but only invisible, but if we set it to 
+        // visibility hidden as well, well, then it's really gone. So why 
+        // don't we just use the visibility hidden without the opacity? Well,
+        // because we cannot animate the visibility, okay?
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+}

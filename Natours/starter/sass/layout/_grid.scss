@@ -1,0 +1,66 @@
+.row {
+    // standard width in grid
+    max-width: $grid-width;
+    margin: 0 auto;
+
+    // using not pseudo-class
+    // select everything except last child
+    &:not(:last-child) {
+        margin-bottom: $gutter-vertical;
+    }
+
+    @include clearfix;
+
+    // !!!! important !!!!
+    // !!!! attribute selector !!!!
+    // specify an attribute(like class, src, alt...) in the brackets
+    // ^= means that we want the beginning to be what we set here.
+    // ^="col-" it will select all of the elements in which
+    // class attribute STARTS with "col-"
+    // *="col-" this means that select any classes, which CONTAINS this part "col-"
+    // $="col-" means that select all of the elements in which
+    // class attribute ENDS with "col-"
+
+    [class^="col-"] {
+        // when all elements in the row are float, 
+        // then the height of the row will collapes 
+        // and becomes zero, 
+        // using clearfix to fix it.
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal;
+        }
+    }
+
+    .col-1-of-2 {
+        width: calc((100% - #{$gutter-horizontal})/2);
+
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - #{$gutter-horizontal*2})/3);
+
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - #{$gutter-horizontal*3})/4);
+
+    }
+
+    .col-2-of-3 {
+        width: calc((100% - #{$gutter-horizontal*2})*2/3 + #{$gutter-horizontal});
+    }
+
+    .col-2-of-4 {
+        width: calc((100% - #{$gutter-horizontal*3})*1/2 + #{$gutter-horizontal});
+
+    }
+
+    .col-3-of-4 {
+        width: calc((100% - #{$gutter-horizontal*3})*3/4 + 2*#{$gutter-horizontal});
+
+    }
+
+
+}

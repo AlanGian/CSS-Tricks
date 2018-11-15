@@ -1,0 +1,29 @@
+.bg-video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden;
+
+    // select video itself
+    &__content{
+        height: 100%;
+        width: 100%;
+
+        // in order to occupy the entire section, but also while
+        // maintaining the aspect ratio
+        object-fit: cover;
+        // it is very similar to having background-size set to cover
+        // where it tries to cover the entire element with the image.
+        // and so object-fit is similar to that but instead of working
+        // with background images, it works with HTML elements, 
+        // or videos in this case, but of course it would work just the 
+        // same with images. and so we can have one parent element
+        // and in there, an image and then with object-fit, we can
+        // make that image cover the parent element
+        
+    }
+}
